@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react';
 import type { useChatState } from '@/hooks/use-chat-state';
 import { usePlugins } from '@/hooks/use-plugins';
-import { SettingsButton } from '../settings';
 import { ToolbarSection } from '../section';
 import { ToolbarButton } from '../button';
-import { PuzzleIcon } from 'lucide-react';
+import { PuzzleIcon, SettingsIcon } from 'lucide-react';
 import { MessageCircleIcon } from 'lucide-react';
 
 export function NormalStateButtons({
@@ -31,16 +30,16 @@ export function NormalStateButtons({
     (plugin) => plugin.onActionClick,
   );
 
-  // Handler for settings button
-  const handleOpenSettings = () =>
-    setOpenPanel(openPanel === 'settings' ? null : 'settings');
-
   return (
     <>
-      <SettingsButton
-        onOpenPanel={handleOpenSettings}
-        isActive={openPanel === 'settings'}
-      />
+      <ToolbarButton
+        onClick={() =>
+          setOpenPanel(openPanel === 'settings' ? null : 'settings')
+        }
+        active={openPanel === 'settings'}
+      >
+        <SettingsIcon className="size-4" />
+      </ToolbarButton>
       {pluginsWithActions.length > 0 && (
         <ToolbarSection>
           {pluginsWithActions.map((plugin) => (

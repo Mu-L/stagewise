@@ -15,7 +15,7 @@ const ReactPlugin: ToolbarPlugin = {
   onContextElementHover: getSelectedElementAnnotation,
   onContextElementSelect: getSelectedElementAnnotation,
   onPromptSend: (prompt) => {
-    const content = getSelectedElementsPrompt(prompt.contextElements);
+    const content = getSelectedElementsPrompt(prompt.metadata.selectedElements);
 
     if (!content) {
       return { contextSnippets: [] };

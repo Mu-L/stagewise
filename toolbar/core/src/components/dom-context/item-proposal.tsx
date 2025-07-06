@@ -69,7 +69,10 @@ export function ContextItemProposal({
         {hoveredElementPluginContext
           .filter((plugin) => plugin.context.annotation)
           .map((plugin) => (
-            <div className="flex flex-row items-center justify-center gap-0.5 overflow-hidden rounded-md bg-zinc-700/80 px-1 py-0 font-medium text-white text-xs">
+            <div
+              key={plugin.pluginName}
+              className="flex flex-row items-center justify-center gap-0.5 overflow-hidden rounded-md bg-zinc-700/80 px-1 py-0 font-medium text-white text-xs"
+            >
               <span className="size-3 shrink-0 stroke-white text-white *:size-full">
                 {
                   plugins.find((p) => p.pluginName === plugin.pluginName)

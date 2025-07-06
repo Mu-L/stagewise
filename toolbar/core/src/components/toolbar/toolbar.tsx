@@ -20,13 +20,12 @@ import { cn } from '@/utils';
 import { useAppState } from '@/hooks/use-app-state';
 import { Logo } from '@/components/ui/logo';
 import type { ReactNode } from 'react';
-import { SettingsPanel } from './settings';
-import { useVSCode } from '@/hooks/use-vscode';
 import { DisconnectedStatePanel } from './panels/disconnected-state';
 import { ConnectingStatePanel } from './panels/connecting-state';
-import { WindowSelectionPanel } from './panels/window-selection';
 import { NormalStateButtons } from './contents/normal';
 import { DisconnectedStateButtons } from './contents/disconnected';
+import { SettingsPanel } from './panels/settings';
+import { AgentSelectionPanel } from './panels/agent-selection';
 
 export function ToolbarDraggableBox() {
   const provider = useContext(DraggableContext) as DraggableContextType | null;
@@ -41,14 +40,13 @@ export function ToolbarDraggableBox() {
     initialSnapArea: 'bottomRight',
   });
 
-  const {
-    windows,
-    isDiscovering,
-    discoveryError,
-    discover,
-    shouldPromptWindowSelection,
-  } = useVSCode();
-  const isConnected = windows.length > 0;
+  const _windows = [];
+  const isDiscovering = false;
+  const discoveryError = null;
+  const discover: () => Promise<void> = async () => {};
+  const shouldPromptWindowSelection = false;
+
+  const isConnected = true; //windows.length > 0;
 
   const [pluginBox, setPluginBox] = useState<null | {
     component: ReactNode;
@@ -175,7 +173,7 @@ export function ToolbarDraggableBox() {
               discoveryError={discoveryError}
             />
           )}
-          {shouldShowWindowSelection && <WindowSelectionPanel />}
+          {shouldShowWindowSelection && <AgentSelectionPanel />}
           {isConnectedState &&
             openPanel === 'settings' &&
             !shouldShowWindowSelection && <SettingsPanel />}
